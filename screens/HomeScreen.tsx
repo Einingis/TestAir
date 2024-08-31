@@ -5,9 +5,9 @@ import { RootStackParamList } from '../navigation/AppNavigator';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
-import { styles } from '../styles';
+import { mainStyles } from '../styles/MainStyles';
 import { fetchWeatherData } from '../utils/FetchData';
-import { addToHistory, getHistory } from '../utils/historyUtils'; // Import the history functions
+import { addToHistory } from '../utils/HistoryUtils';
 
 const Logo = require('../assets/Logo.png');
 
@@ -35,35 +35,40 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.Logo}>
-        <Image source={Logo} style={{ width: '100%', resizeMode: 'contain' }} />
-      </View>
-      <StatusBar barStyle="default" />
-      <Formik
-        initialValues={{ city: '' }}
-        onSubmit={values => openWeather(values.city)
-        }
-      >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+    <View style={mainStyles.container}>
+      <View style={mainStyles.centerContent}>
+        <View style={mainStyles.logo}>
+          <Image source={Logo} style={{ width: '100%', resizeMode: 'contain' }} />
+        </View>
+        <Formik
+          initialValues={{ city: '' }}
+          onSubmit={(values) => openWeather(values.city)}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <View style={mainStyles.inputContainer}>
+              <TextInput
+                onChangeText={handleChange('city')}
+                onBlur={handleBlur('city')}
+                value={values.city}
+                placeholder="Enter city name"
+                style={mainStyles.inputWindow}
+              />
+              <View style={mainStyles.buttonContainer}>
+                <Button onPress={() => handleSubmit()} title="Go!" />
+              </View>
+            </View>
+          )}
+        </Formik>
+
+        {error && (
           <View>
-            <TextInput
-              onChangeText={handleChange('city')}
-              onBlur={handleBlur('city')}
-              value={values.city}
-              placeholder={"Enter city name"}
-              style={{ borderWidth: 1, padding: 10, marginVertical: 10 }}
-            />
-            <Button onPress={() => handleSubmit()} title="Submit" />
+            <Text style={{ color: 'red', alignSelf: 'center' }}>Error: {error}</Text>
           </View>
         )}
-      </Formik>
-      {error && (
-        <View>
-          <Text style={{ color: 'red' }}>Error: {error}</Text>
-        </View>
-      )}
-      <Button onPress={() => openHistory()} title='History' />
+      </View>
+      <View style={mainStyles.historyContainer}>
+        <Button onPress={openHistory} title="History" />
+      </View>
     </View>
   );
 };

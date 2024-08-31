@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
-import { styles } from '../styles';
-import { getHistory } from '../utils/historyUtils';
+import { styles } from '../styles/MainStyles';
+import { getHistory } from '../utils/HistoryUtils';
 
 const HistoryScreen = () => {
   const [history, setHistory] = useState<string[]>([]);

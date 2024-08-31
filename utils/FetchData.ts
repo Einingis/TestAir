@@ -7,9 +7,13 @@ export const fetchWeatherData = (city: string): Promise<any> => {
       if (data.cod !== 200) {
         throw new Error(data.message);
       }
-      return data; // Return the weather data if successful
+      return data;
     })
     .catch((err) => {
-      throw err; // Re-throw error to be handled in the calling function
+      throw err;
     });
+};
+
+export const getWeatherIconUrl = (iconId: string): string => {
+  return `https://openweathermap.org/img/wn/${iconId}@2x.png`;
 };

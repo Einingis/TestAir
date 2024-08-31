@@ -7,8 +7,6 @@ export const addToHistory = async (city: string): Promise<void> => {
     const historyString = await AsyncStorage.getItem(HISTORY_KEY);
     const history = historyString ? JSON.parse(historyString) : [];
 
-    console.log(history);
-
     const updatedHistory = [city, ...history.filter((c: string) => c !== city)].slice(0, 5);
 
     await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
