@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
 import { styles } from '../styles';
+import { fetchWeatherData } from '../utils/FetchData';
 
 const Logo = require('../assets/Logo.png');
 
@@ -15,21 +16,19 @@ const HomeScreen = () => {
   const [error, setError] = useState<string | null>(null);
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const fetchWeatherData = (city: string) => {
-    const apiLink = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=10692b614cde4a27abc3caf08c696dfa&units=metric`;
-
-    fetch(apiLink)
-      .then((response) => response.json())
+  const openWeather = (city: string) => {
+    fetchWeatherData(city)
       .then((data) => {
-        if (data.cod !== 200) {
-          throw new Error(data.message);
-        }
         setError(null);
         navigation.navigate('Weather', { weatherData: data });
       })
       .catch((err) => {
         setError(err.message);
       });
+  };
+
+  const openHistory = () => {
+    navigation.navigate('History');
   };
 
   return (
@@ -40,7 +39,8 @@ const HomeScreen = () => {
       <StatusBar barStyle="default" />
       <Formik
         initialValues={{ city: '' }}
-        onSubmit={values => fetchWeatherData(values.city)}
+        onSubmit={values => openWeather(values.city)
+        }
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
@@ -49,7 +49,7 @@ const HomeScreen = () => {
               onBlur={handleBlur('city')}
               value={values.city}
               placeholder={"Enter city name"}
-              style={{ borderWidth: 1, padding: 10, marginVertical: 10 }} // Added some basic styling for better UI
+              style={{ borderWidth: 1, padding: 10, marginVertical: 10 }}
             />
             <Button onPress={() => handleSubmit()} title="Submit" />
           </View>
@@ -60,6 +60,7 @@ const HomeScreen = () => {
           <Text style={{ color: 'red' }}>Error: {error}</Text>
         </View>
       )}
+      <Button onPress={() => openHistory()} title='History' />
     </View>
   );
 };
