@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Image, TextInput, StatusBar } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -7,6 +7,7 @@ import { Formik } from 'formik';
 
 import { styles } from '../styles';
 import { fetchWeatherData } from '../utils/FetchData';
+import { addToHistory, getHistory } from '../utils/historyUtils'; // Import the history functions
 
 const Logo = require('../assets/Logo.png');
 
@@ -18,8 +19,10 @@ const HomeScreen = () => {
 
   const openWeather = (city: string) => {
     fetchWeatherData(city)
-      .then((data) => {
+      .then(async (data) => {
         setError(null);
+        await addToHistory(data.name);
+
         navigation.navigate('Weather', { weatherData: data });
       })
       .catch((err) => {
