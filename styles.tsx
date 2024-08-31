@@ -13,5 +13,9 @@ export const styles = StyleSheet.create({
     height: 100,
     backgroundColor: '#000000',
     overflow: 'hidden',
-  }
+  },
+  text: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
 });
