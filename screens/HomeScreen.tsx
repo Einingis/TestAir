@@ -17,12 +17,12 @@ const HomeScreen = () => {
   const [error, setError] = useState<string | null>(null);
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const openWeather = (city: string) => {
+  const openWeather = async (city: string, resetForm: () => void) => {
     fetchWeatherData(city)
       .then(async (data) => {
         setError(null);
         await addToHistory(data.name);
-
+        resetForm();
         navigation.navigate('Weather', { weatherData: data });
       })
       .catch((err) => {
@@ -42,7 +42,7 @@ const HomeScreen = () => {
         </View>
         <Formik
           initialValues={{ city: '' }}
-          onSubmit={(values) => openWeather(values.city)}
+          onSubmit={(values, { resetForm }) => openWeather(values.city, resetForm)}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <View style={mainStyles.inputContainer}>
@@ -62,7 +62,7 @@ const HomeScreen = () => {
 
         {error && (
           <View>
-            <Text style={{ color: 'red', alignSelf: 'center' }}>Error: {error}</Text>
+            <Text style={{ color: 'red', alignSelf: 'center', paddingTop: 10 }}>Error: {error}</Text>
           </View>
         )}
       </View>

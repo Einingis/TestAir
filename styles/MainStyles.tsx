@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const mainStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3e3e3e',
+    backgroundColor: '#afb9ba',
     justifyContent: 'space-between',
     paddingBottom: 50
   },
@@ -15,39 +15,53 @@ export const mainStyles = StyleSheet.create({
   logo: {
     width: '80%'
   },
-  text: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
   inputContainer: {
-    width: '60%',
-    alignItems: 'center',
+    width: '80%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
   },
   inputWindow: {
-    borderWidth: 1,
-    marginRight: 20,
-    borderColor: '#CCCCCC',
+    borderWidth: 2,
+    borderColor: '#ccc',
     borderRadius: 5,
-    padding: 10,
-    marginLeft: -40,
-    width: '100%',
-    marginBottom: 10,
+    width: '70%',
+    paddingLeft: 5,
+
   },
   buttonContainer: {
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: '#CCCCCC',
+    borderWidth: 2,
+    borderColor: '#ccc',
     borderRadius: 10,
-    marginBottom: 20,
+    width: '25%',
+    backgroundColor: '#afb9ba',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+
+    elevation: 5,
   },
   historyContainer: {
-    borderWidth: 1,
-    borderColor: '#CCCCCC',
+    borderWidth: 2,
+    borderColor: '#ccc',
     borderRadius: 10,
-    height: 35,
+    height: 'auto',
     width: 130,
     alignSelf: 'center',
     marginBottom: 20,
+    backgroundColor: '#afb9ba',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 2,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+
+    elevation: 5,
   },
 });
