@@ -64,4 +64,9 @@ export const mainStyles = StyleSheet.create({
 
     elevation: 5,
   },
+  errorMessage: {
+    color: 'red',
+    alignSelf: 'center',
+    marginTop: 5
+  }
 });
