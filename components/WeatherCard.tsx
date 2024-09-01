@@ -1,4 +1,3 @@
-// src/components/Card.tsx
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { format } from 'date-fns';
@@ -21,7 +20,7 @@ const WeatherCard: React.FC<CardProps> = ({ city, description, temp, dt, imageUr
   };
 
   const convertTimestampToReadableDate = (timestamp: number): Date => {
-    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    const date = new Date(timestamp * 1000);
     return date;
   };
 

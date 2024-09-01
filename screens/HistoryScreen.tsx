@@ -9,7 +9,7 @@ import { weatherStyles } from '../styles/WeatherCardStyles';
 const HistoryScreen = () => {
   const [history, setHistory] = useState<string[]>([]);
   const [weatherDataList, setWeatherDataList] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // New state to manage loading
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -27,7 +27,7 @@ const HistoryScreen = () => {
   useEffect(() => {
     const fetchWeatherForHistory = async () => {
       if (history.length === 0) {
-        setLoading(false); // Stop loading if no history is available
+        setLoading(false);
         return;
       }
 
@@ -48,7 +48,7 @@ const HistoryScreen = () => {
   const renderWeatherCard = (weatherData: any) => {
     return (
       <WeatherCard
-        key={weatherData.id} // Use a unique key for each card
+        key={weatherData.id}
         city={weatherData.name}
         description={weatherData.weather[0].description}
         temp={weatherData.main.temp}
